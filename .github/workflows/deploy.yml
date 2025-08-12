@@ -1,0 +1,19 @@
+name: Deploy
+'on':
+  push:
+    branches:
+    - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build Docker Image
+      run: docker build -t mcp-test-app .
+    - name: Push Docker Image
+      run: 'echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME
+        }} --password-stdin
+
+        docker tag mcp-test-app ${{ secrets.DOCKER_USERNAME }}/mcp-test-app
+
+        docker push ${{ secrets.DOCKER_USERNAME }}/mcp-test-app'
