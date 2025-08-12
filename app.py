@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello from MCP test app!"
+    return "testing github actions"
 
 @app.route("/health")
 def health():
